@@ -2,8 +2,12 @@
 
 ## Tecnologias
 
+- [EditorConfig](https://www.notion.so/EditorConfig-5f494ae4b47248c1b16681ff74d6766c)
+- [ESLint](https://www.notion.so/ESLint-822d59afeafc47e39527be8cabb80b00)
+- [Prettier](https://www.notion.so/Prettier-e2c6a3ec188c4cce8890a3e16a0d6425)
 - [React](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Styled Components](https://styled-components.com/)
 
 ---
 
