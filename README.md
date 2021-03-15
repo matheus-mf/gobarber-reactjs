@@ -8,6 +8,7 @@
 - [React](https://pt-br.reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components](https://styled-components.com/)
+- [Polished](https://polished.js.org/)
 
 ---
 
