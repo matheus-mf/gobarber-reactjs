@@ -10,6 +10,7 @@
 - [Styled Components](https://styled-components.com/)
 - [Polished](https://polished.js.org/)
 - [Unform](https://unform.dev/)
+- [Yup](https://github.com/jquense/yup)
 
 ---
 
