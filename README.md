@@ -11,6 +11,7 @@
 - [Polished](https://polished.js.org/)
 - [Unform](https://unform.dev/)
 - [Yup](https://github.com/jquense/yup)
+- [react-spring](https://www.react-spring.io/)
 
 ---
 
