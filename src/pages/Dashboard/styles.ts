@@ -159,6 +159,10 @@ export const Section = styled.section`
     line-height: 26px;
     border-bottom: 1px solid #3e3b47;
   }
+
+  > p {
+    color: #999591;
+  }
 `;
 
 export const Appointment = styled.div`
