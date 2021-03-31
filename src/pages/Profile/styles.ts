@@ -56,7 +56,7 @@ export const AvatarInput = styled.div`
     border-radius: 50%;
   }
 
-  button {
+  label {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,6 +69,11 @@ export const AvatarInput = styled.div`
     right: 0;
     bottom: 0;
     transition: background-color 0.2s;
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
 
     &:hover {
       background: ${shade(0.2, '#ff9000')};
