@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { FiClock, FiPower } from 'react-icons/all';
+import { isToday, format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import ReactPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import { FiClock, FiPower } from 'react-icons/all';
 
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
@@ -26,6 +28,15 @@ interface MonthAvailabilityItem {
   available: boolean;
 }
 
+interface Appointment {
+  id: string;
+  date: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+}
+
 const Dashboard: React.FC = () => {
   const { singOut, user } = useAuth();
 
@@ -36,6 +47,8 @@ const Dashboard: React.FC = () => {
     MonthAvailabilityItem[]
   >([]);
 
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+
   const handleDayChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available) {
       setSelectedDate(day);
@@ -45,17 +58,6 @@ const Dashboard: React.FC = () => {
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
   }, []);
-
-  const disableDays = useMemo(() => {
-    return monthAvailability
-      .filter(monthDay => !monthDay.available)
-      .map(monthDay => {
-        const year = currentMonth.getFullYear();
-        const month = currentMonth.getMonth();
-
-        return new Date(year, month, monthDay.day);
-      });
-  }, [currentMonth, monthAvailability]);
 
   useEffect(() => {
     api
@@ -69,6 +71,45 @@ const Dashboard: React.FC = () => {
         setMonthAvailability(response.data);
       });
   }, [currentMonth, user.id]);
+
+  useEffect(() => {
+    api
+      .get('/appointments/me', {
+        params: {
+          year: selectedDate.getFullYear(),
+          month: selectedDate.getMonth() + 1,
+          day: selectedDate.getDate(),
+        },
+      })
+      .then(response => {
+        setAppointments(response.data);
+        // eslint-disable-next-line no-console
+        console.log(response.data);
+      });
+  }, [selectedDate]);
+
+  const disableDays = useMemo(() => {
+    return monthAvailability
+      .filter(monthDay => !monthDay.available)
+      .map(monthDay => {
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
+
+        return new Date(year, month, monthDay.day);
+      });
+  }, [currentMonth, monthAvailability]);
+
+  const selectDateAsText = useMemo(() => {
+    return format(selectedDate, "'Dia' dd 'de' MMMM", {
+      locale: ptBR,
+    });
+  }, [selectedDate]);
+
+  const selectWeekDay = useMemo(() => {
+    return format(selectedDate, 'cccc', {
+      locale: ptBR,
+    });
+  }, [selectedDate]);
 
   return (
     <Container>
@@ -94,9 +135,9 @@ const Dashboard: React.FC = () => {
         <Schedule>
           <h1>Horários agendados</h1>
           <p>
-            <span>Hoje</span>
-            <span>Dia 05</span>
-            <span>Segunda-feira</span>
+            {isToday(selectedDate) && <span>Hoje</span>}
+            <span>{selectDateAsText}</span>
+            <span>{selectWeekDay}</span>
           </p>
 
           <NextAppointment>
