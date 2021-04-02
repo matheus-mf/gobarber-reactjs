@@ -14,6 +14,7 @@ import Button from '../../components/Button';
 
 import { Background, Container, AnimationContainer, Content } from './styles';
 import { useToast } from '../../hooks/toast';
+import api from '../../services/api';
 
 interface SingUpFormData {
   name: string;
@@ -43,6 +44,8 @@ const SignUp: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
+
+        await api.post('/users', data);
 
         history.push('/');
 
