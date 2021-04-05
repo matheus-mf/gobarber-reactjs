@@ -14,6 +14,8 @@
 - [react-spring](https://www.react-spring.io/)
 - [react-router-dom](https://reactrouter.com/web/guides/quick-start)
 - [react-day-picker](https://react-day-picker.js.org/)
+- [Testing Library](https://testing-library.com/)
+- [react-hooks-testing-library](https://react-hooks-testing-library.com/)
 
 ---
 
